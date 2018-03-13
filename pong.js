@@ -15,30 +15,40 @@ var down1Pressed = false;
 var down2Pressed = false;
 
 
-function drawStartMenu() {
-
-    ctx.font = "70px Comic Sans MS";
+function drawStartMenu(){
+    
+    ctx.font = "200px Black Ops One";
     ctx.fillStyle = "white";
     ctx.textAlign = "center";
-    ctx.fillText("Pong", canvas.width / 2, canvas.height / 4);
+    ctx.fillText("PONG", canvas.width/2, canvas.height/4); 
+    
 
-
-    ctx.font = "30px Comic Sans MS";
+    ctx.font = "40px Black Ops One";
     ctx.fillStyle = "white";
     ctx.textAlign = "center";
-    ctx.fillText("Start", canvas.width / 2, canvas.height / 2);
-
-    ctx.font = "30px Comic Sans MS";
+    ctx.fillText("1 Player", canvas.width/2, canvas.height/2);
+    
+    ctx.font = "40px Black Ops One";
     ctx.fillStyle = "white";
     ctx.textAlign = "center";
-    ctx.fillText("1 Player", canvas.width / 2, canvas.height / 2);
+    ctx.fillText("2 Players Local", canvas.width/2, 420);
+
+    ctx.font = "40px Black Ops One";
+    ctx.fillStyle = "white";
+    ctx.textAlign = "center";
+    ctx.fillText("2 Players Online", canvas.width/2, 500);
+
+    ctx.beginPath();
+    ctx.lineWidth = "3";
+    ctx.strokeStyle = "lightgreen"
+    ctx.rect(400, 300, 400, 240);
+    ctx.stroke();
 
 
 }
 
 function drawPongStartScreen() {
     drawStartMenu();
-
 }
 
 function drawScore() {}
@@ -123,9 +133,8 @@ function collisionDetetction() {
 
 function drawBall(){}
 
-function drawScore(){
+function drawScore(){}
 
-}
 
 function drawStartMenu(){
     
@@ -160,10 +169,10 @@ function drawStartMenu(){
 
 }
 
-function drawBall() {}
+
 
 function drawPong() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clearing the canvas
+    //ctx.clearRect(0, 0, canvas.width, canvas.height); // Clearing the canvas
 
     lineDash();
     drawPaddle();
@@ -182,8 +191,9 @@ function drawPong() {
     } else if (down2Pressed) {
         paddle1y += 5;
     }
-}
+}}
 
 
-//setInterval(drawPong, 10);
-setInterval(drawPongStartScreen, 10);
+setInterval(drawPong, 10);
+
+//setInterval(drawPongStartScreen, 10);
