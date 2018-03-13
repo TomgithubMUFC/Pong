@@ -3,58 +3,88 @@ var ctx = canvas.getContext("2d");
 
 var x = canvas.width / 2;
 var y = canvas.height - 350;
-var paddle1x = 20;
-var paddle2x = 1180;
+var paddle1x = 60;
+var paddle2x = 1140;
 var paddle1y = canvas.height - 350;
 var paddle2y = canvas.height - 350;
 var paddleWidth = 10;
 var paddleHeight = 70;
-var direction1;
-var direction2;
+var up1Pressed = false;
+var up2Pressed = false;
+var down1Pressed = false;
+var down2Pressed = false;
 
 // >>>>>>>>>>>>>>>>>>>>>> SCREEN MENU
-function drawStartMenu(){
-    
+function drawStartMenu() {
+
     ctx.font = "70px Comic Sans MS";
     ctx.fillStyle = "white";
     ctx.textAlign = "center";
-    ctx.fillText("Pong", canvas.width/2, canvas.height/4); 
-    
-    
+    ctx.fillText("Pong", canvas.width / 2, canvas.height / 4);
+
+
     ctx.font = "30px Comic Sans MS";
     ctx.fillStyle = "white";
     ctx.textAlign = "center";
-    ctx.fillText("Start", canvas.width/2, canvas.height/2);
-    
+    ctx.fillText("Start", canvas.width / 2, canvas.height / 2);
+
     ctx.font = "30px Comic Sans MS";
     ctx.fillStyle = "white";
     ctx.textAlign = "center";
-    ctx.fillText("1 Player", canvas.width/2, canvas.height/2);
+    ctx.fillText("1 Player", canvas.width / 2, canvas.height / 2);
 
 
 }
 
-function drawPongStartScreen(){
+function drawPongStartScreen() {
     drawStartMenu();
 
 }
 
-function drawScore(){}
+function drawScore() {}
 
-//>>>>>>>>>>>>>>>>>>>>>>>> GAME 
+// >>>>>>>>>>>>>>>>>>>>>>>> GAME 
+document.addEventListener("keydown", p1DownHandler, false);
+document.addEventListener("keyup", p1UpHandler, false); 
+document.addEventListener("keydown", p2DownHandler, false);
+document.addEventListener("keyup", p2UpHandler, false); 
 
-$(document).keydown(function(e) {
-    var key = e.which;
-    if(key == "38") direction1 = "up";
-    else if(key == "40") direction1 = "down";
 
-    if(key == "87") direction2 = "up";
-    else if(key == "83") direction2 = "down";
-})
+function p1DownHandler(e) {
+    if (e.keyCode == 38) {
+        up1Pressed = true;
+    } else if (e.keyCode == 40) {
+        down1Pressed = true;
+    }
+}
+
+function p1UpHandler(e) {
+    if (e.keyCode == 38) {
+        up1Pressed = false;
+    } else if (e.keyCode == 40) {
+        down1Pressed = false;
+    }
+}
+
+function p2DownHandler(e) {
+    if (e.keyCode == 87) {
+        up2Pressed = true;
+    } else if (e.keyCode == 83) {
+        down2Pressed = true;
+    }
+}
+
+function p2UpHandler(e) {
+    if (e.keyCode == 87) {
+        up2Pressed = false;
+    } else if (e.keyCode == 83) {
+        down2Pressed = false;
+    }
+}
 
 function lineDash() {
     ctx.beginPath();
-    ctx.setLineDash([10,5]);
+    ctx.setLineDash([10, 5]);
     ctx.moveTo(x, 0);
     ctx.lineTo(x, canvas.height);
     ctx.strokeStyle = "white";
@@ -63,13 +93,7 @@ function lineDash() {
 }
 
 function drawPaddle() {
-    if(direction1 == "up") paddle1y -= 5;
-    else if(direction1 == "down") paddle1y += 5;
-
-    if(direction2 == "up") paddle2y -= 5;
-    else if(direction2 == "down") paddle2y += 5;
-
-    ctx.beginPath();    // paddle 1
+    ctx.beginPath(); // paddle 1
     ctx.rect(paddle1x, paddle1y, paddleWidth, paddleHeight)
     ctx.fillStyle = "white";
     ctx.fill();
@@ -82,17 +106,27 @@ function drawPaddle() {
     ctx.closePath();
 }
 
+function drawBall() {}
 
-function drawBall(){
-}
-
-function drawPong(){
-    ctx.clearRect(0, 0, canvas.width, canvas.height); //clearing the canvas
+function drawPong() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clearing the canvas
 
     lineDash();
     drawPaddle();
     drawBall();
     drawScore();
+
+    if (up1Pressed) {
+        paddle1y -= 5
+    } else if (down1Pressed) {
+        paddle1y += 5;
+    }
+    
+    if (up2Pressed) {
+        paddle2y -= 5
+    } else if (down2Pressed) {
+        paddle2y += 5;
+    }
 }
 
 
