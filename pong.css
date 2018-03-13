@@ -1,3 +1,5 @@
-#pong {
+#myCanvas {
     background-color: #353535;
+    margin: 0px 200px;
+    border: 3px solid black;
 } 
