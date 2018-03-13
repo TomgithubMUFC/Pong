@@ -3,6 +3,9 @@ var ctx = canvas.getContext("2d");
 
 var x = canvas.width / 2;
 var y = canvas.height - 350;
+var ballx = canvas.width / 2;
+var bally = canvas.height - 350;
+var ballRadius = 5;
 var paddle1x = 60;
 var paddle2x = 1140;
 var paddle1y = canvas.height - 350;
@@ -13,6 +16,10 @@ var up1Pressed = false;
 var up2Pressed = false;
 var down1Pressed = false;
 var down2Pressed = false;
+var dx = 3;
+var dy = -3;
+var p1score = 0;
+var p2score = 0;
 
 // >>>>>>>>>>>>>>>>>>>>>> SCREEN MENU
 function drawStartMenu() {
@@ -41,13 +48,23 @@ function drawPongStartScreen() {
 
 }
 
-function drawScore() {}
+function drawScore() {
+    ctx.font = "30px Comic Sans MS";
+    ctx.fillStyle = "white";
+    ctx.textAlign = "center";
+    ctx.fillText(p1score, canvas.width / 3, 40);
+
+    ctx.font = "30px Comic Sans MS";
+    ctx.fillStyle = "white";
+    ctx.textAlign = "center";
+    ctx.fillText(p2score, 900, 40);
+}
 
 // >>>>>>>>>>>>>>>>>>>>>>>> GAME 
 document.addEventListener("keydown", p1DownHandler, false);
-document.addEventListener("keyup", p1UpHandler, false); 
+document.addEventListener("keyup", p1UpHandler, false);
 document.addEventListener("keydown", p2DownHandler, false);
-document.addEventListener("keyup", p2UpHandler, false); 
+document.addEventListener("keyup", p2UpHandler, false);
 
 
 function p1DownHandler(e) {
@@ -118,9 +135,35 @@ function collisionDetetction() {
     } else if (paddle2y + 70 > canvas.height) {
         paddle2y -= 10;
     }
+
+    if (ballx + dx > canvas.width) {
+        p1score +=1;
+        ballx = canvas.width / 2;
+        bally = canvas.height - 350
+    } else if (ballx + dx < 0) {
+        p2score +=1;
+        ballx = canvas.width / 2;
+        bally = canvas.height - 350
+    }
+
+    if (bally + dy > canvas.height || bally + dy < 0) {
+        dy = -dy;
+    }
+
+    if (ballx > paddle1x && ballx < paddle1x + paddleWidth && bally > paddle1y && bally < paddle1y + paddleHeight) {
+        dx = -dx;
+    } else if (ballx > paddle2x && ballx < paddle2x + paddleWidth && bally > paddle2y && bally < paddle2y + paddleHeight) {
+        dx = -dx;
+    }
 }
 
-function drawBall() {}
+function drawBall() {
+    ctx.beginPath();
+    ctx.arc(ballx, bally, ballRadius, 0, Math.PI * 2);
+    ctx.fillStyle = "white";
+    ctx.fill();
+    ctx.closePath();
+}
 
 function drawPong() {
     ctx.clearRect(0, 0, canvas.width, canvas.height); // Clearing the canvas
@@ -136,12 +179,15 @@ function drawPong() {
     } else if (down1Pressed) {
         paddle2y += 5;
     }
-    
+
     if (up2Pressed) {
         paddle1y -= 5
     } else if (down2Pressed) {
         paddle1y += 5;
     }
+
+    ballx += dx;
+    bally += dy;
 }
 
 
