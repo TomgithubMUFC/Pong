@@ -18,42 +18,11 @@ var down1Pressed = false;
 var down2Pressed = false;
 var dx = 3;
 var dy = -3;
-var p1score = 0;
-var p2score = 0;
 
-function drawStartMenu(){
-    
-    ctx.font = "200px Black Ops One";
-    ctx.fillStyle = "white";
-    ctx.textAlign = "center";
-    ctx.fillText("PONG", canvas.width/2, canvas.height/4); 
-    
-    ctx.font = "40px Black Ops One";
-    ctx.fillStyle = "white";
-    ctx.textAlign = "center";
-    ctx.fillText("1 Player", canvas.width/2, canvas.height/2);
-    
-    ctx.font = "40px Black Ops One";
-    ctx.fillStyle = "white";
-    ctx.textAlign = "center";
-    ctx.fillText("2 Players Local", canvas.width/2, 420);
 
-    ctx.font = "40px Black Ops One";
-    ctx.fillStyle = "white";
-    ctx.textAlign = "center";
-
-    ctx.fillText("1 Player", canvas.width / 2, canvas.height / 2);
-    ctx.fillText("2 Players Online", canvas.width/2, 500);
-
-    ctx.beginPath();
-    ctx.lineWidth = "3";
-    ctx.strokeStyle = "lightgreen"
-    ctx.rect(400, 300, 400, 240);
-    ctx.stroke();
-}
 
 function drawPongStartScreen() {
-    drawStartMenu();
+    drawStartMenu();}
  
 function drawStartMenu() {
 
@@ -81,7 +50,8 @@ function drawStartMenu() {
     ctx.lineWidth = "3";
     ctx.strokeStyle = "lightgreen"
     ctx.rect(400, 300, 400, 240);
-    ctx.stroke();
+    ctx.stroke();ctx.font = "40px Black Ops One";
+    
 }
 
 // >>>>>>>>>>>>>>>>>>>>>>>> GAME 
@@ -96,7 +66,7 @@ function p1DownHandler(e) {
         up1Pressed = true;
     } else if (e.keyCode == 40) {
         down1Pressed = true;
-    }
+    } 
 }
 
 function p1UpHandler(e) {
@@ -120,7 +90,7 @@ function p2UpHandler(e) {
         up2Pressed = false;
     } else if (e.keyCode == 83) {
         down2Pressed = false;
-    }
+    } 
 }
 
 function lineDash() {
@@ -145,7 +115,7 @@ function drawPaddle() {
     ctx.fillStyle = "white";
     ctx.fill();
     ctx.closePath();
-}
+} 
 
 
 function collisionDetetction() {
@@ -162,11 +132,11 @@ function collisionDetetction() {
     }
 
     if (ballx + dx > canvas.width) {
-        p1score += 1;
+        score1 += 1;
         ballx = canvas.width / 2;
         bally = canvas.height - 350
     } else if (ballx + dx < 0) {
-        p2score += 1;
+        score2 += 1;
         ballx = canvas.width / 2;
         bally = canvas.height - 350
     }
@@ -179,7 +149,7 @@ function collisionDetetction() {
         dx = -dx;
     } else if (ballx > paddle2x && ballx < paddle2x + paddleWidth && bally > paddle2y && bally < paddle2y + paddleHeight) {
         dx = -dx;
-    }
+    } 
 }
 
 function drawBall() {
@@ -188,6 +158,23 @@ function drawBall() {
     ctx.fillStyle = "white";
     ctx.fill();
     ctx.closePath();
+}
+
+var score1 = 0
+var score2 = 0
+
+function drawScore(){
+
+    ctx.font = "150px Black Ops One";
+    ctx.fillStyle = "white";
+    ctx.textAlign = "center";
+    ctx.fillText(score1, canvas.width / 3, 140);
+
+    ctx.font = "150px Black Ops One";
+    ctx.fillStyle = "white";
+    ctx.textAlign = "center";
+    ctx.fillText(score2, 750, 140);
+
 }
 
 function drawPong() {
@@ -213,8 +200,8 @@ function drawPong() {
 
     ballx += dx;
     bally += dy;
-}
-}}
+ }
+ 
 
 
 setInterval(drawPong, 10);
