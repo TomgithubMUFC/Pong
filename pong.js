@@ -52,6 +52,37 @@ function drawPaddle() {
 }
 
 
+function drawBall(){}
+
+function drawScore(){
+
+}
+
+function drawStartMenu(){
+    
+    ctx.font = "70px Comic Sans MS";
+    ctx.fillStyle = "white";
+    ctx.textAlign = "center";
+    ctx.fillText("Pong", canvas.width/2, canvas.height/4); 
+    
+    
+    ctx.font = "30px Comic Sans MS";
+    ctx.fillStyle = "white";
+    ctx.textAlign = "center";
+    ctx.fillText("Start", canvas.width/2, canvas.height/2);
+    
+    ctx.font = "30px Comic Sans MS";
+    ctx.fillStyle = "white";
+    ctx.textAlign = "center";
+    ctx.fillText("1 Player", canvas.width/2, canvas.height/2);
+
+
+}
+
+function drawPongStartScreen(){
+    drawStartMenu();
+
+}
 
 function drawPong(){
     ctx.clearRect(0, 0, canvas.width, canvas.height); //clearing the canvas
@@ -62,10 +93,4 @@ function drawPong(){
 
 
 setInterval(drawPong, 10);
-
-
-function drawPong(){
-    lineDash();
-}
-
-setInterval(drawPong, 10);
+setInterval(drawPongStartScreen, 10);
