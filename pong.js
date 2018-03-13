@@ -1,9 +1,14 @@
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
-var x = canvas/2;
-ctx.beginPath();
-ctx.rect(x, 40, 50, 50);
-ctx.fillStyle = "white";
-ctx.fill();
-ctx.closePath();
+var x = canvas.width / 2;
+var y = canvas.height - 350;
+
+function drawCenter() {
+    
+    ctx.beginPath();
+    ctx.rect(x, y, 50, 50);
+    ctx.fillStyle = "white";
+    ctx.fill();
+    ctx.closePath();
+}
