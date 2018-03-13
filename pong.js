@@ -106,6 +106,20 @@ function drawPaddle() {
     ctx.closePath();
 }
 
+function collisionDetetction() {
+    if (paddle1y < 0) {
+        paddle1y += 10;
+    } else if (paddle1y + 70 > canvas.height) {
+        paddle1y -= 10;
+    }
+
+    if (paddle2y < 0) {
+        paddle2y += 10;
+    } else if (paddle2y + 70 > canvas.height) {
+        paddle2y -= 10;
+    }
+}
+
 function drawBall() {}
 
 function drawPong() {
@@ -115,17 +129,18 @@ function drawPong() {
     drawPaddle();
     drawBall();
     drawScore();
+    collisionDetetction();
 
     if (up1Pressed) {
-        paddle1y -= 5
+        paddle2y -= 5
     } else if (down1Pressed) {
-        paddle1y += 5;
+        paddle2y += 5;
     }
     
     if (up2Pressed) {
-        paddle2y -= 5
+        paddle1y -= 5
     } else if (down2Pressed) {
-        paddle2y += 5;
+        paddle1y += 5;
     }
 }
 
