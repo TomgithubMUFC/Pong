@@ -60,4 +60,12 @@ function drawPong(){
     drawPaddle();
 }
 
+
+setInterval(drawPong, 10);
+
+
+function drawPong(){
+    lineDash();
+}
+
 setInterval(drawPong, 10);
