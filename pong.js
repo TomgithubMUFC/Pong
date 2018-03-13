@@ -12,3 +12,12 @@ function drawCenter() {
     ctx.fill();
     ctx.closePath();
 }
+
+
+
+
+function drawPong(){
+    drawCenter();
+}
+
+setInterval(drawPong, 10);
