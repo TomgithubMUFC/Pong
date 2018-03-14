@@ -1,9 +1,10 @@
 body{
-    background-color: rgb(49, 48, 48);
+    background-image: url(img/jungle.jpg);
+    display: table;
 }
 
 #myCanvas {
-    background-color: black;
+    background: black;
     padding-left: 0;
     padding-right: 0;
     margin-top: 60px;
@@ -13,4 +14,3 @@ body{
     display: block;
     border: dashed white;
 } 
-
